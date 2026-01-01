@@ -1,14 +1,17 @@
-import './App.css'
-import Hero from './components/Hero'
-import Navbar from './components/Navbar'
+import { Route, Routes } from 'react-router-dom'
+import Register from './pages/Register'
+import Login from './pages/Login'
+import Home from './pages/Home'
 
 function App() {
 
   return (
     <>
-    <Navbar />
-    <Hero />    
-      <div>This is my first component in A-chat</div>
+      <Routes>
+        <Route path='/' element={<Home />}/>
+        <Route path='/login' element={<Login />}/>
+        <Route path='/register' element={<Register />}/>
+      </Routes>
     </>
   )
 }
