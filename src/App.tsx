@@ -1,7 +1,8 @@
 import { Route, Routes } from 'react-router-dom'
-import Register from './pages/Register'
 import Login from './pages/Login'
 import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
+import DashboardLayout from './components/DashboardLayout'
 
 function App() {
 
@@ -9,8 +10,11 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<Home />}/>
-        <Route path='/login' element={<Login />}/>
-        <Route path='/register' element={<Register />}/>
+        <Route path='login' element={<Login />}/>
+        
+        <Route path='dashboard' element={<DashboardLayout />}>
+          <Route index element={<Dashboard />} />
+        </Route>
       </Routes>
     </>
   )

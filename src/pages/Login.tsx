@@ -1,31 +1,28 @@
-import { useState } from "react";
-import { FaApple } from "react-icons/fa";
+import { useEffect } from "react";
 import Logo from "../components/Logo";
-import { Link } from "react-router-dom";
-
-interface User {
-  email: string;
-  password: string;
-}
+import backendurl from "../global";
+import axios from "axios";
 
 function Login() {
-  const [user, setUser] = useState<User>({ email: "", password: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Logining with:", user);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setUser((prev) => ({ ...prev, [name]: value }));
-  };
+  useEffect(()=>{
+             axios.get(`${backendurl}/auth/me`)
+            .then((result)=>{
+              window.location.href = "http://localhost:5173/dashboard"
+                console.log(result, "dgre")
+            })
+            .catch((err)=>{
+                console.log(err);
+                window.location.href = "http://localhost:5173/login"
+                
+            })
+        }, [])
 
   return (
     <div>
       <div className="flex py-4 md:px-20 px-10 justify-between">
-        <div><Logo size={'4xl'}/></div>
-        <a href='/register'><div className="bg-black rounded-md py-2 px-6 text-sm text-white">Register</div></a>
+        <div><Logo/></div>
+        <a href='/'><div className="bg-black rounded-md py-2 px-6 text-sm text-white">Home</div></a>
       </div>
 
       <section className="flex items-center justify-center min-h-[88vh] px-5 md:px-1">
@@ -36,9 +33,9 @@ function Login() {
             share and study with friends
           </h1>
 
-          <form onSubmit={handleSubmit} className="flex flex-col items-center">
-            <div className="w-full flex flex-col space-y-4">
-              <input
+          <form className="flex flex-col items-center">
+            {/* <div className="w-full flex flex-col space-y-4"> */}
+              {/* <input
                 type="email"
                 name="email"
                 value={user.email}
@@ -56,22 +53,23 @@ function Login() {
                 className="rounded-md border border-gray-300 h-10 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-black"
                 placeholder="Password"
                 required
-              />
+              /> */}
 
-              <button
+              {/* <button
                 type="submit"
                 className="rounded-md text-white bg-black h-10 text-sm font-medium hover:bg-gray-800 transition"
               >
                 Log In
               </button>
-            </div>
-
-            <div className="text-sm text-gray-400 my-4">or</div>
+            </div> */}
+{/* 
+            <div className="text-sm text-gray-400 my-4">or</div> */}
 
             <div className="w-full space-y-3">
-              <button
+              <a href="http://localhost:4000/api/auth/google">
+                <button
                 type="button"
-                className="w-full rounded-md border border-gray-300 h-10 flex items-center justify-center space-x-3 hover:bg-gray-100 transition"
+                className="cursor-pointer w-full rounded-md border border-gray-300 h-10 flex items-center justify-center space-x-3 hover:bg-gray-100 transition"
               >
                 <img
                   className="h-5 w-5"
@@ -80,14 +78,15 @@ function Login() {
                 />
                 <span className="text-sm font-medium">Continue with Google</span>
               </button>
+              </a>
 
-              <button
+              {/* <button
                 type="button"
                 className="w-full rounded-md border border-gray-300 h-10 flex items-center justify-center space-x-3 hover:bg-gray-100 transition"
               >
                 <FaApple className="text-xl" />
                 <span className="text-sm font-medium">Continue with Apple</span>
-              </button>
+              </button> */}
             </div>
 
             <p className="text-xs text-gray-400 text-center mt-6 max-w-sm">

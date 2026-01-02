@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom"
+import backendurl from "../global";
+import { useEffect } from "react";
+import axios from "axios";
 
 function Hero(){
+     
     return (
         <>
             <div className="max-w-7xl mx-auto text-sm flex items-center justify-center w-6/6 bg-gray-00">
